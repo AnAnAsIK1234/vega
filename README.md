@@ -2,7 +2,7 @@
 
 - **Best for error minimization:** Elastic Net, Lasso
 - **Best for cross-sectional ranking:** Ridge, OLS
-- **Model to avoid:** Rolling OLS
+- **Worst Model:** Rolling OLS
 
 ---
 
