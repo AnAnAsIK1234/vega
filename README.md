@@ -47,11 +47,6 @@ Elastic Net and Lasso are the strongest models.
 - Elastic Net improves on Kalman TVP by about **13.2% in mean MSE**
 - Lasso improves on Kalman TVP by about **12.6% in mean MSE**
 
-#### If the objective is cross-sectional ranking
-Ridge and OLS perform best.
-
-Kalman TVP ranks below both Ridge and OLS on Spearman correlation.
-
 ---
 
 ## Typical Quarters vs Stress Periods
