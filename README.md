@@ -69,7 +69,7 @@ Kalman TVP ranks below both Ridge and OLS on Spearman correlation.
 
 I think this means the main differences between models do **not** come from ordinary periods.
 
-The real separation appears in:
+The real separation obviously appears in:
 
 - difficult quarters
 - stressed regimes
