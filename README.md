@@ -280,6 +280,4 @@ Rolling OLS is the weakest model in the experiment.
 
 If SHAP outputs are added later, this analysis should be extended to compare:
 
-- coefficient-based interpretation
-- SHAP-based contribution importance
-- stability of feature importance across models and regimes
+
