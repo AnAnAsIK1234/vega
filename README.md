@@ -166,14 +166,11 @@ These models often collapse toward a very sparse structure:
 
 - intercept
 - a small number of strong macro / market variables
-- heavy shrinkage on cross-sectional features
 
 This explains the trade-off:
 
 - **stronger MSE**
 - **weaker ranking power**
-
-They reduce variance well, but often do not produce rich cross-sectional separation.
 
 ---
 
@@ -193,10 +190,6 @@ The model places the strongest weight on:
 - momentum
 - market volatility
 - regime indicators
-
-This makes it useful for interpretation and factor dynamics analysis.
-
-However, this adaptiveness does not convert into the best out-of-sample predictive performance.
 
 ---
 
@@ -242,12 +235,7 @@ This is a critical finding:
 
 **The data do not support aggressively time-varying coefficients for most periods.**
 
-That means the main bottleneck is likely not model flexibility, but rather:
-
-- noisy features
-- unstable scaling
-- weak cross-sectional normalization
-- fragile interaction structure
+That means the main bottleneck is likely not model flexibility, but rather noisy features
 
 ---
 
@@ -280,7 +268,5 @@ That stability likely explains why they perform best on ranking.
 ## Rolling OLS
 
 Rolling OLS is the weakest model in the experiment.
-
-If SHAP outputs are added later, this analysis should be extended to compare:
 
 
