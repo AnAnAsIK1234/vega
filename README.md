@@ -439,9 +439,7 @@ The sequence model is not extracting a useful signal in its current specificatio
 
 This suggests that one or more of the following is true:
 
-* the architecture is too small
 * the quarterly sample is too short for this model class
 * the available feature history does not support a transformer advantage
-* the model is under-tuned relative to the simpler baselines
 
 So PatchTST does **not** justify its added complexity in this run.
