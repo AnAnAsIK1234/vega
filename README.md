@@ -1,4 +1,4 @@
-### [LINK]([sandbox:/mnt/data/drive-download-20260422T151528Z-3-001.zip](https://drive.google.com/drive/u/3/folders/13TOoqHVEwvUXFq8WRz-UDyrj3q4p673t)) of results (csv)
+### [LINK](https://drive.google.com/drive/u/3/folders/13TOoqHVEwvUXFq8WRz-UDyrj3q4p673t) of results (csv)
 
 ### Practical winners by objective
 
