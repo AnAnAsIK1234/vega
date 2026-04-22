@@ -1,5 +1,7 @@
 ### [LINK](https://drive.google.com/drive/u/3/folders/13TOoqHVEwvUXFq8WRz-UDyrj3q4p673t) of results (csv)
 
+The results for the Phase 3 reliability-scaling extension are reported directly in the rolling-model output files. In particular, predictions.csv contains prediction_raw, reliability_score, and prediction_scaled, while metrics.csv reports the corresponding aggregate diagnostics such as raw_mse, raw_mae, raw_spearman_rank_corr, and mean_reliability_score. This makes it possible to trace the effect of the reliability adjustment both at the individual forecast level and at the overall model-performance level.
+
 ### Practical winners by objective
 
 * **Best for error minimization:** CatBoost, Elastic Net, Lasso
