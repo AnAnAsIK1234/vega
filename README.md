@@ -5,7 +5,7 @@ The following columns are added to `predictions.csv`:
 | Column | LaTeX notation | Meaning |
 |---|---|---|
 | `abs_error` | $e_{i,t}^{(m)}$ | Absolute forecast error for the current observation. |
-| `median_j_e_t_m` | ```math $\mathrm{median}_{j}(e_{j,t}^{(m)})$``` | Cross-sectional median absolute error for model `m` at date `t`. |
+| `median_j_e_t_m` | ```math \mathrm{median}_{j}(e_{j,t}^{(m)})``` | Cross-sectional median absolute error for model `m` at date `t`. |
 | `e_rolling_i_t_m` | $\bar{e}_{i,t}^{(m)}$ | Lagged rolling mean absolute error for asset `i` and model `m`. This is based only on past errors. |
 | `e_rolling_model_t_m` | $\bar{e}_{\mathrm{model},t}^{(m)}$ | Model-level lagged rolling mean absolute error, used as fallback when asset-level history is too short. |
 | `e_reliability_i_t_m` | $\bar{e}_{i,t}^{(m),*}$ | Error measure actually used for reliability scaling. It uses `e_rolling_i_t_m` when available, otherwise `e_rolling_model_t_m`. |
