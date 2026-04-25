@@ -17,26 +17,26 @@ The following columns are added to `predictions.csv`:
 
 ### Reliability scaling formula
 
-For each model \(m\), asset \(i\), and date \(t\), the absolute forecast error is
+For each model \(m\), asset \(i\), and date \(t\), I first compute the absolute forecast error:
 
-\[
+```math
 e_{i,t}^{(m)} =
-\left| r_{i,t} - \hat{\mu}_{i,t}^{(m)} \right|.
-\]
+\left| r_{i,t} - \hat{\mu}_{i,t}^{(m)} \right|
+```
 
 The reliability score is not based on the current error. Instead, I use a lagged rolling mean of past errors:
 
-\[
+```math
 \bar{e}_{i,t}^{(m)}
 =
 \frac{1}{W}
 \sum_{\tau=t-W}^{t-1}
-e_{i,\tau}^{(m)}.
-\]
+e_{i,\tau}^{(m)}
+```
 
 Then I normalise this error by the cross-sectional median rolling error for the same model and date:
 
-\[
+```math
 s_{i,t}^{(m)}
 =
 \frac{
@@ -46,29 +46,29 @@ s_{i,t}^{(m)}
 \left(
 \bar{e}_{j,t}^{(m)}
 \right)
-}.
-\]
+}
+```
 
 This gives a relative instability score. If \(s_{i,t}^{(m)} > 1\), the model has recently been less reliable for this asset than for the median asset in the cross-section.
 
-The reliability coefficient is then computed as
+The reliability coefficient is then computed as:
 
-\[
+```math
 q_{i,t}^{(m)}
 =
-\frac{1}{1 + \lambda s_{i,t}^{(m)}} ,
+\frac{1}{1 + \lambda s_{i,t}^{(m)}},
 \qquad
-q_{i,t}^{(m)} \in [0,1].
-\]
+q_{i,t}^{(m)} \in [0,1]
+```
 
 Finally, the raw forecast is scaled before portfolio optimisation:
 
-\[
+```math
 \tilde{\mu}_{i,t}^{(m)}
 =
 q_{i,t}^{(m)}
 \cdot
-\hat{\mu}_{i,t}^{(m)}.
-\]
+\hat{\mu}_{i,t}^{(m)}
+```
 
 Here, \(W\) is the rolling window length and \(\lambda\) controls how strongly unreliable forecasts are shrunk. In the baseline setup, I use \(W=4\) and \(\lambda=0.5\). Since the rolling error is shifted by one period, the reliability score at date \(t\) only uses information available before \(t\).
