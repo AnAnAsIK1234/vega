@@ -49,7 +49,7 @@ s_{i,t}^{(m)}
 }
 ```
 
-This gives a relative instability score. If \(s_{i,t}^{(m)} > 1\), the model has recently been less reliable for this asset than for the median asset in the cross-section.
+This gives a relative instability score. If $\(s_{i,t}^{(m)} > 1\)$, the model has recently been less reliable for this asset than for the median asset in the cross-section.
 
 The reliability coefficient is then computed as:
 
@@ -71,4 +71,4 @@ q_{i,t}^{(m)}
 \hat{\mu}_{i,t}^{(m)}
 ```
 
-Here, \(W\) is the rolling window length and \(\lambda\) controls how strongly unreliable forecasts are shrunk. In the baseline setup, I use \(W=4\) and \(\lambda=0.5\). Since the rolling error is shifted by one period, the reliability score at date \(t\) only uses information available before \(t\).
+Here, \(W\) is the rolling window length and $\(\lambda\)$ controls how strongly unreliable forecasts are shrunk. In the baseline setup, I use \(W=4\) and $\(\lambda=0.5\)$. Since the rolling error is shifted by one period, the reliability score at date \(t\) only uses information available before \(t\).
