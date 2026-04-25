@@ -2,18 +2,18 @@
 
 The following columns are added to `predictions.csv`:
 
-| Column | Meaning |
-|---|---|
-| `abs_error` | Absolute forecast error for the current observation. |
-| `median_j_e_t_m` | Cross-sectional median absolute error for model `m` at date `t`. |
-| `e_rolling_i_t_m` | Lagged rolling mean absolute error for asset `i` and model `m`. This is based only on past errors. |
-| `e_rolling_model_t_m` | Model-level lagged rolling mean absolute error, used as fallback when asset-level history is too short. |
-| `e_reliability_i_t_m` | Error measure actually used for reliability scaling. It uses `e_rolling_i_t_m` when available, otherwise `e_rolling_model_t_m`. |
-| `median_j_e_rolling_t_m` | Cross-sectional median of the lagged rolling error measure for model `m` at date `t`. |
-| `s_reliability` | Relative instability score. Higher values mean the recent forecast error is high compared with the cross-section. |
-| `q_reliability` | Reliability score in `[0, 1]`. Lower values shrink the forecast more strongly. |
-| `mu_tilde_i_t_m` | Reliability-scaled forecast used as the final adjusted expected return. |
-| `prediction_scaled` | Same as `mu_tilde_i_t_m`, kept as a convenient alias. |
+| Column | LaTeX notation | Meaning |
+|---|---|---|
+| `abs_error` | $e_{i,t}^{(m)}$ | Absolute forecast error for the current observation. |
+| `median_j_e_t_m` | $\mathrm{median}_{j}(e_{j,t}^{(m)})$ | Cross-sectional median absolute error for model `m` at date `t`. |
+| `e_rolling_i_t_m` | $\bar{e}_{i,t}^{(m)}$ | Lagged rolling mean absolute error for asset `i` and model `m`. This is based only on past errors. |
+| `e_rolling_model_t_m` | $\bar{e}_{\mathrm{model},t}^{(m)}$ | Model-level lagged rolling mean absolute error, used as fallback when asset-level history is too short. |
+| `e_reliability_i_t_m` | $\bar{e}_{i,t}^{(m),*}$ | Error measure actually used for reliability scaling. It uses `e_rolling_i_t_m` when available, otherwise `e_rolling_model_t_m`. |
+| `median_j_e_rolling_t_m` | $\mathrm{median}_{j}(\bar{e}_{j,t}^{(m),*})$ | Cross-sectional median of the lagged rolling error measure for model `m` at date `t`. |
+| `s_reliability` | $s_{i,t}^{(m)}$ | Relative instability score. Higher values mean the recent forecast error is high compared with the cross-section. |
+| `q_reliability` | $q_{i,t}^{(m)}$ | Reliability score in `[0, 1]`. Lower values shrink the forecast more strongly. |
+| `mu_tilde_i_t_m` | $\tilde{\mu}_{i,t}^{(m)}$ | Reliability-scaled forecast used as the final adjusted expected return. |
+| `prediction_scaled` | $\tilde{\mu}_{i,t}^{(m)}$ | Same as `mu_tilde_i_t_m`, kept as a convenient alias. |
 
 ### Reliability scaling formula
 
