@@ -42,7 +42,7 @@ s_{i,t}^{(m)}
 \frac{
 \bar{e}_{i,t}^{(m)}
 }{
-\operatorname{median}_{j}
+\mathrm{median}_{j}
 \left(
 \bar{e}_{j,t}^{(m)}
 \right)
