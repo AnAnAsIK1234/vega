@@ -60,14 +60,14 @@ The selector result may be partly driven by a limited number of assets and sever
 
 Interpretation is:
 
-> Additional diagnostics show that PatchTST-selected quarters are characterized by a noticeable concentration of contributions. With an average number of assets of about 8.7, the top 5 positions give an average of 73.3% of the weight and 87.1% of the absolute contribution to profitability. Consequently, the outcome of the PatchTST regime partly depends on a limited set of securities and individual strong quarters.
+> PatchTST-selected quarters are characterized by a noticeable concentration of contributions. With an average number of assets of about 8.7, the top 5 positions give an average of 73.3% of the weight and 87.1% of the absolute contribution to profitability. Consequently, the outcome of the PatchTST regime partly depends on a limited set of securities and individual strong quarters.
 
 
 ### D. Bootstrap confidence bands
 
 The question is:
 
-> Do the confidence intervals of `selector_rule_based` materially dominate the confidence intervals of `always_linear` and `always_transformer`?
+> Do the confidence intervals of `selector_rule_based` materially dominate the confidence intervals of `always_transformer`?
 
 #### Selector vs transformer
 
