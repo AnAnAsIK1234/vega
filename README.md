@@ -1,272 +1,84 @@
 ### [LINK](https://drive.google.com/drive/folders/1aqejhmAynCWdTeJcUBcZtxaRPWL9C2PN?usp=drive_link) of results (csv)
 
+### A. Comparison with `always_transformer` after 2020
 
-### Practical winners by objective
+The post-2020 sample contains 19 quarters:
 
-- **Best for error minimization:** Elastic Net, Lasso
-- **Best for cross-sectional ranking:** Ridge, OLS
-- **Worst Model:** Rolling OLS
+| Group | Number of quarters | selector_rule_based | always_transformer | Difference |
+|---|---:|---:|---:|---:|
+| All quarters after 2020 | 19 | 0.0568 | 0.0652 | -0.0085 |
+| Identical to transformer | 15 | 0.0692 | 0.0692 | 0.0000 |
+| Switch away from transformer | 4 | 0.0102 | 0.0504 | -0.0402 |
 
+The result shows that after 2020 `selector_rule_based` does not outperform `always_transformer`. In 15 out of 19 quarters the two strategies are identical. In the remaining 4 quarters, where the selector switches away from PatchTST to CatBoost, the selector underperforms the transformer baseline.
+
+Therefore, interpretation is:
+
+> After 2020, `selector_rule_based` mostly replicates the transformer strategy. The few switches away from the transformer don't improve performance in this subsample. 
 ---
 
-## Final Metric Comparison
+### B. Ex ante status of the rule
 
-### Mean MSE
+I've chosen rule for selector_rule_based regardless of the results. It was just my assumption.
 
-- **Elastic Net:** 0.0661
-- **Lasso:** 0.0665
-- **Kalman TVP:** 0.0761
-- **Ridge:** 0.0845
-- **OLS:** 0.0866
-- **Rolling OLS:** 0.2381
+### C. Turnover and transaction concentration
 
-### Mean MAE
+#### Turnover diagnostics
 
-- **Elastic Net:** 0.1765
-- **Lasso:** 0.1765
-- **Kalman TVP:** 0.1991
-- **Ridge:** 0.2049
-- **OLS:** 0.2067
-- **Rolling OLS:** 0.3126
+| Strategy | Mean turnover, full sample | Median turnover, full sample | Mean turnover after 2020 | Median turnover after 2020 |
+|---|---:|---:|---:|---:|
+| `selector_rule_based` | 0.805 | 0.850 | 0.855 | 0.882 |
+| `always_transformer` | 0.884 | 0.945 | 0.865 | 0.906 |
+| `always_linear` | 0.606 | 0.605 | 0.560 | 0.566 |
 
-### Mean Spearman
+The selector has high turnover. Its turnover is close to the transformer strategy and noticeably higher than the linear strategy.
 
-- **Ridge:** 0.0484
-- **OLS:** 0.0477
-- **Kalman TVP:** 0.0327
-- **Rolling OLS:** 0.0310
-- **Elastic Net:** -0.0165
-- **Lasso:** -0.0172
+#### Concentration in PatchTST-selected quarters
 
----
+| Metric | Value |
+|---|---:|
+| Mean number of active assets | 8.73 |
+| Mean top-5 weight share | 0.733 |
+| Mean top-5 absolute contribution share | 0.871 |
+| Quarters where top-5 contribution share exceeds 80% | 14 / 15 |
+| Mean top-1 absolute contribution share | 0.344 |
+| Maximum top-1 absolute contribution share | 0.645 |
 
-## Key Interpretation
+This means that in PatchTST-selected quarters, a small group of positions explains a large part of the portfolio result.
 
-### 1. Best models depend on the objective
+At the asset level, the contribution is also concentrated:
 
-#### If the objective is forecast accuracy
-Elastic Net and Lasso are the strongest models.
+| Asset group | Share of absolute contribution |
+|---|---:|
+| Top 5 assets | 33.9% |
+| Top 10 assets | 54.1% |
+| Top 20 assets | 74.8% |
 
-- Elastic Net improves on Kalman TVP by about **13.2% in mean MSE**
-- Lasso improves on Kalman TVP by about **12.6% in mean MSE**
+#### Interpretation
 
----
+The selector result may be partly driven by a limited number of assets and several strong quarters.
 
-## Typical Quarters vs Stress Periods
+Interpretation is:
 
-### Median MSE
+> Additional diagnostics show that PatchTST-selected quarters are characterized by a noticeable concentration of contributions. With an average number of assets of about 8.7, the top 5 positions give an average of 73.3% of the weight and 87.1% of the absolute contribution to profitability. Consequently, the outcome of the PatchTST regime partly depends on a limited set of securities and individual strong quarters.
 
-- Elastic Net: 0.0465
-- Lasso: 0.0465
-- Ridge: 0.0486
-- OLS: 0.0492
-- Kalman TVP: 0.0494
-- Rolling OLS: 0.0500
 
-### Interpretation
+### D. Bootstrap confidence bands
 
-I think this means the main differences between models do **not** come from ordinary periods.
+The question is:
 
-The real separation obviously appears in:
+> Do the confidence intervals of `selector_rule_based` materially dominate the confidence intervals of `always_linear` and `always_transformer`?
 
-- difficult quarters
-- stressed regimes
-- tail events
+#### Selector vs transformer
 
----
+| Metric | `selector_rule_based` CI | `always_transformer` CI | Heavy overlap |
+|---|---:|---:|---:|
+| Mean return | [0.0162; 0.1465] | [0.0114; 0.1448] | True |
+| Annualized return | [0.0425; 0.6769] | [0.0251; 0.6639] | True |
+| Sharpe ratio | [0.2047; 2.2563] | [0.1167; 2.1307] | True |
+| Max drawdown | [-0.4011; -0.0610] | [-0.3957; -0.0868] | True |
+| Calmar ratio | [0.1315; 8.6834] | [0.0687; 6.1021] | True |
 
-## Stability in the Tails
+The diagnostic result is:
 
-A useful proxy for instability is:
-
-`mean MSE / median MSE`
-
-- Elastic Net: 1.42
-- Lasso: 1.43
-- Kalman TVP: 1.54
-- Ridge: 1.74
-- OLS: 1.76
-- Rolling OLS: 4.76
-
-### Interpretation
-
-- **Elastic Net and Lasso** have the best tail control
-- **Kalman TVP** is more stable than OLS and Ridge, but still weaker than Elastic Net / Lasso
-- **Rolling OLS** is highly unstable and prone to blow-ups
-
----
-
-## Regime Analysis
-
-### Inflation regime
-
-#### Kalman TVP
-- low inflation MSE: 0.0649
-- high inflation MSE: 0.0934
-
-This is a deterioration of about **44%**.
-
-#### Elastic Net / Lasso
-Only a small degradation, around **3%**.
-
-#### OLS / Ridge
-These models actually perform slightly **better** in high inflation than in low inflation.
-
-### Conclusion
-
-Kalman TVP does **not** show the expected advantage in inflation regime adaptation.
-
----
-
-### Stress regime
-
-#### Kalman TVP
-- non-stress MSE: 0.0508
-- stress MSE: 0.0925
-
-This is roughly an **82%** increase.
-
-#### Elastic Net / Lasso
-Roughly **55%** increase.
-
-#### OLS / Ridge
-Almost no deterioration, and in some cases slightly better.
-
-#### Rolling OLS
-Very large deterioration:
-- 0.0954 -> 0.3305
-
-### Conclusion
-
-Kalman TVP does not dominate in stress periods, and Rolling OLS is clearly not robust enough.
-
----
-
-## Why Elastic Net and Lasso Win on MSE but Lose on Ranking
-
-This behavior is explained by the coefficient paths.
-
-### Lasso
-- all slope coefficients are zero in **60.7%** of periods
-
-### Elastic Net
-- all slope coefficients are zero in **46.4%** of periods
-
-Additional feature-level sparsity is also high:
-
-- `value_it` zeroed in about **78.6%**
-- `illiq_amihud_m` zeroed in about **75.0%**
-- `value_x_inflhigh` zeroed in about **75–78.6%**
-- `state_dd_stress` zeroed in about **71.4%**
-- `MOM` and `size_it` zeroed in more than **64%**
-
-### Interpretation
-
-These models often collapse toward a very sparse structure:
-
-- intercept
-- a small number of strong macro / market variables
-
-This explains the trade-off:
-
-- **stronger MSE**
-- **weaker ranking power**
-
----
-
-## Largest average absolute coefficients of Kalman TVP
-
-- `MOM`: 0.0818
-- `mkt_vol`: 0.0715
-- `state_dd_stress`: 0.0338
-- `state_infl_high`: 0.0337
-- `size_it`: 0.0300
-- `illiq_amihud_m`: 0.0260
-
-### Interpretation
-
-The model places the strongest weight on:
-
-- momentum
-- market volatility
-- regime indicators
-
----
-
-## Evidence of Over-Adaptation in Kalman TVP
-
-Kalman TVP also shows frequent sign changes:
-
-- `size_it`: 6 sign changes
-- `state_dd_stress`: 7
-- `intercept`: 6
-- `state_infl_high`: 4
-- `value_it`: 4
-
-### Interpretation
-
-This suggests that part of the model’s flexibility may be reacting to noise rather than stable economic structure.
-
----
-
-## What the Chosen `q` Values Tell Us
-
-Three Kalman TVP state-noise settings were tested:
-
-- `q = 1e-5`
-- `q = 1e-4`
-- `q = 1e-3`
-
-### Final selected path
-- `1e-5`: 13 times
-- `1e-4`: 8 times
-- `1e-3`: 7 times
-
-### Validation selection
-- `1e-5`: 16 times
-- `1e-4`: 8 times
-- `1e-3`: 5 times
-
-### Interpretation
-
-Most of the time, the model prefers **slow coefficient drift**.
-
-This is a critical finding:
-
-**The data do not support aggressively time-varying coefficients for most periods.**
-
-That means the main bottleneck is likely not model flexibility, but rather noisy features
-
----
-
-## OLS and Ridge
-
-OLS and Ridge are simple, but their behavior is coherent and stable.
-
-### Top OLS features
-- `mkt_vol`: 0.0285
-- `state_infl_high`: 0.0206
-- `MOM`: 0.0152
-- `size_it`: 0.0151
-- `state_dd_stress`: 0.0139
-
-### Top Ridge features
-- `mkt_vol`: 0.0280
-- `state_infl_high`: 0.0198
-- `size_it`: 0.0149
-- `MOM`: 0.0147
-- `state_dd_stress`: 0.0136
-
-### Interpretation
-
-Their coefficients are much more stable than Kalman TVP and Rolling OLS.
-
-That stability likely explains why they perform best on ranking.
-
----
-
-## Rolling OLS
-
-Rolling OLS is the weakest model in the experiment.
-
-
+The bootstrap intervals overlap heavily. Therefore, even if the point estimates of `selector_rule_based` are higher in the full sample, the bootstrap results do not support a strong claim that the selector materially dominates.
