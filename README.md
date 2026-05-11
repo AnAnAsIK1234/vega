@@ -33,7 +33,7 @@ I've chosen rule for selector_rule_based regardless of the results. It was just 
 
 The selector has high turnover. Its turnover is close to the transformer strategy and noticeably higher than the linear strategy.
 
-#### Concentration in PatchTST-selected quarters
+#### PatchTST-selected periods
 
 | Metric | Value |
 |---|---:|
