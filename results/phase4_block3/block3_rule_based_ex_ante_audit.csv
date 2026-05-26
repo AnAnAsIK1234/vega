@@ -1,0 +1,2 @@
+rule_name;rule_version;declared_fixed_ex_ante;rule_lock_date;uses_realized_portfolio_returns;uses_future_returns;uses_forecast_values;uses_observable_regime_states;regime_inputs_available;linear_model;transformer_model;nonlinear_model;interpretation
+selector_rule_based;rule_based_v1;False;;False;False;False;True;state_infl_high, state_vol_high_auto, state_dd_stress;ridge;patchtst_global;catboost_lags_regimes;Strong evidence only if declared_fixed_ex_ante=True and the rule was fixed before running portfolio backtest. Otherwise treat selector result as provisional.

@@ -1,0 +1,4 @@
+sample;n_quarters;n_identical_to_transformer;n_switch_away_from_transformer;mean_selector_return;mean_transformer_return;mean_diff_selector_minus_transformer;median_diff_selector_minus_transformer;hit_rate_selector_gt_transformer;cumulative_selector_return;cumulative_transformer_return;cumulative_diff_selector_minus_transformer
+all_after_2020;19;15;4;0.05676434;0.06522889;-0.00846455;0.0;0.0;1.42849293;1.81728868;-0.38879575
+identical_to_transformer;15;15;0;0.0691846;0.0691846;0.0;0.0;0.0;1.35971347;1.35971347;0.0
+switch_away_from_transformer;4;0;4;0.01018839;0.05039499;-0.0402066;-0.02518696;0.0;0.02914738;0.19391134;-0.16476397
