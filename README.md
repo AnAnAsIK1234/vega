@@ -1,5 +1,0 @@
-### first step
-
-https://drive.google.com/drive/u/3/folders/1CSqddma-eVW0iVbpKpvIzljCEHpB-wja
-
-This stage builds the first reduced Kalman TVP pipeline for quarterly MOEX stock return forecasting. The model uses target_q_fwd_clean as the dependent variable and estimates time-varying effects of size, value, momentum, market volatility, illiquidity, regime indicators, and selected regime interactions. The data were prepared as an unbalanced stock-level panel with market-wide monthly state variables; missing stock months were not filled, and value_it was computed only when equity and market capitalization were positive. The pipeline applies rolling quarterly estimation, training-window imputation and standardization, validation-based selection of the Kalman state noise parameter, and out-of-sample cross-sectional prediction. The stage outputs stock-level predictions, quarterly forecast metrics, validation logs, coefficient paths, and regime summaries. The current run covers 28 out-of-sample quarters from 2018-12-31 to 2025-09-30 and generates 6,408 forecasts across 284 securities.
